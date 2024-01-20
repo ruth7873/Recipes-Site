@@ -1,0 +1,63 @@
+@font-face {
+  font-family: "Shluk DL v2 AAA";
+  font-style: normal;
+  font-weight: normal;
+  src: url(font/shluk-regular-aaa.otf) format("openType");
+}
+
+* {
+  font-family: Shluk DL v2 AAA;  
+}
+
+.App {
+  text-align: center;
+  background-image: url(./images/imgbackground.jpg);
+  background-size: cover;
+  background-position-x: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+.recipes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardAction {
+  display: flex;
+  justify-content: center;
+}
+
+.recipes img {
+  margin-left: 25%;
+  width: 50%;
+  height: 50%;
+}
+
+.p {
+  height: 100vh;
+}
+
+.shopping {
+  background-image: none;
+}
+
+.add {
+  background-image: url(./images/img3.webp);
+  background-size: cover;
+  background-position-x: center;
+}
+
+.form {
+  padding: 15%;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+.card{
+  padding: 10px;
+}
