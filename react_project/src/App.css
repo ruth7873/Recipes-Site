@@ -61,3 +61,15 @@
 .card{
   padding: 10px;
 }
+
+#copyright {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#copyright_img {
+  width: 30px;
+  height: 30px;
+  padding-top: 0px;
+}

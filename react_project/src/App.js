@@ -10,9 +10,10 @@ import AddRecipe from './pages/AddRecipe';
 import Image from './images/logo.jpeg';
 import Recipe from './pages/Recipe';
 import Image2 from './images/img.jpeg'
+import Image3 from './images/copyright.png';
 
 function App() {
-  const { pathname } = useLocation()
+  const { pathname } = useLocation();
   return (
     <>
       <img src={Image} alt="logo" style={{ width: 120, left: 20, top: 40, position: 'absolute' }}></img>
@@ -34,6 +35,13 @@ function App() {
         {pathname === "/" ?
           <img src={Image2} style={{ width: 1000 }} alt='open img'></img> : null}
       </div>
+
+      <div id="copyright">
+        <p> ruth0533137873@gmail.com כל הזכויות שמורות לרות הרשלר</p>
+        <img src={Image3} id="copyright_img" />
+
+      </div>
+
     </>
   );
 }

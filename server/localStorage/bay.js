@@ -5,28 +5,28 @@ localStorage = new LocalStorage('./scratch');
 const bay = [
     {
         "Id": 1,
-        "Name": "Bamba",
+        "Name": "במבה",
         "UserId": 1,
         "Count": 1
 
     },
     {
         "Id": 2,
-        "Name": "Dark Chocolate",
+        "Name": "שוקולד מריר",
         "UserId": 1,
         "Count": 2
 
     },
     {
         "Id": 3,
-        "Name": "Beasley",
+        "Name": "ביסלי",
         "UserId": 1,
         "Count": 5
 
     },
     {
         "Id": 4,
-        "Name": "flour",
+        "Name": "קמח",
         "UserId": 2,
         "Count": 8
 
