@@ -22,20 +22,20 @@ export default (props) => {
             <CardContent>
                 <div variant="body2" color="text.secondary">
                     <h2>{props.props.Description}</h2>
-                    <h3>Category:</h3>
+                    <h3>קטגוריה:</h3>
                     <div>{categories[props.props.CategoryId - 1]?.Name}</div>
-                    <h3>Duration:</h3>
+                    <h3>משך זמן:</h3>
                     <div> {props.props.Duration} minutes</div>
-                    <h3> Difficulty:</h3>
+                    <h3> רמת קושי:</h3>
                     <div>{difficulty[props.props.Difficulty - 1]}</div>
-                    <h3>Ingrident:</h3>{props.props.Ingrident.map((x, i) =>
+                    <h3>מצרכים:</h3>{props.props.Ingrident.map((x, i) =>
                         <div key={i}>
                             <div>{x.Name} {x.Count} {x.Type}</div>
                             <Button variant="outlined" startIcon={<ShoppingBasketIcon />} onClick={() => dispatch(editAdd(x.Name, 1, user))}>
-                                BUY
+                                קנה
                             </Button>
                         </div>)}
-                    <h3>Instructions:</h3>
+                    <h3>הוראות הכנה:</h3>
                     {props.props.Instructions.map((x, i) =>
                         <div key={i}>
                             {x}</div>)}
@@ -43,7 +43,7 @@ export default (props) => {
                     <Button size="small" startIcon={<Print />} onClick={() => (
                         window.print()
                     )}>
-                        Print
+                        הדפסה
                     </Button>
                 </div>
             </CardContent>

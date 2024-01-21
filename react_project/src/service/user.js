@@ -10,7 +10,7 @@ export const SetUser = (data, navigate) => {
                 Swal.fire({
                     position: "center",
                     icon: "success",
-                    title: `welcome ${data.userName}!!!`,
+                    title: `ברוך הבא ${data.userName}!!!`,
                     showConfirmButton: false,
                     timer: 2500
                 });

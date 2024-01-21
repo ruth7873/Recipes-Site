@@ -6,18 +6,20 @@ import { useSelector, useDispatch } from "react-redux";
 import { TextField, Button, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { addRecipe, editRecipe } from '../service/recipes'
+import { Remove } from "@mui/icons-material";
+
 
 export default () => {
     const schema = yup
         .object({
-            Name: yup.string().required(),
-            CategoryId: yup.number().required(),
-            Img: yup.string().required(),
+            Name: yup.string().required("שדה חובה"),
+            CategoryId: yup.number().required(""),
+            Img: yup.string().required("שדה חובה"),
             UserId: yup.number().required(),
             Duration: yup.number().required(),
             Difficulty: yup.number().required(),
-            Description: yup.string().required(),
-            Instructions: yup.array(yup.string()),
+            Description: yup.string().required("הכנס תאור קצר"),
+            Instructions: yup.array(yup.string("כתוב הוראות הכנה")),
             Ingrident: yup.array().of(yup.object({
                 Name: yup.string().nullable(),
                 Count: yup.string().nullable(),
@@ -46,10 +48,10 @@ export default () => {
             Description: state?.Description, Ingrident: state?.Ingrident, Instructions: state?.Instructions
         }
     })
-    const { fields: Instructions, append: appendInstructions } = useFieldArray({
+    const { fields: Instructions, append: appendInstructions, remove: removeInst } = useFieldArray({
         control, name: "Instructions"
     });
-    const { fields: Ingrident, append: appendIngridents } = useFieldArray({
+    const { fields: Ingrident, append: appendIngridents, remove: removeIngr } = useFieldArray({
         control, name: "Ingrident"
     });
     const onSubmit = (data) => {
@@ -64,12 +66,12 @@ export default () => {
     return (
         <div className='add'>
             <form className='form' onSubmit={handleSubmit(onSubmit)}>
-                <TextField style={{ width: '20%', backgroundColor: "whitesmoke", opacity: 0.7 }} label="Recipe Name" {...register("Name")} error={!!errors.Name} helperText={errors.Name?.message} />
+                <TextField style={{ width: '20%', backgroundColor: "whitesmoke", opacity: 0.7 }} label="שם מתכון" {...register("Name")} error={!!errors.Name} helperText={errors.Name?.message} />
                 <br />
-                <TextField style={{ width: '20%', backgroundColor: "whitesmoke", opacity: 0.7 }} label="Description" {...register("Description")} error={!!errors.Description} helperText={errors.Description?.message} />
+                <TextField style={{ width: '20%', backgroundColor: "whitesmoke", opacity: 0.7 }} label="תאור" {...register("Description")} error={!!errors.Description} helperText={errors.Description?.message} />
                 <br />
                 <FormControl style={{ width: '20%', backgroundColor: "whitesmoke", opacity: 0.7 }}>
-                    <InputLabel>CategoryId</InputLabel>
+                    <InputLabel>קטגוריה</InputLabel>
                     <Select {...register("CategoryId")} error={!!errors.CategoryId} displayEmpty>
                         {Categories.map((x) => (
                             <MenuItem key={x.Id} value={x.Id}>
@@ -79,12 +81,12 @@ export default () => {
                     </Select>
                 </FormControl>
                 <br />
-                <TextField style={{ width: '20%', backgroundColor: "whitesmoke", opacity: 0.7 }} label="Img URL" {...register("Img")} error={!!errors.Img} helperText={errors.Img?.message} />
+                <TextField style={{ width: '20%', backgroundColor: "whitesmoke", opacity: 0.7 }} label="כתובת תמונה" {...register("Img")} error={!!errors.Img} helperText={errors.Img?.message} />
                 <br />
-                <TextField style={{ width: '20%', backgroundColor: "whitesmoke", opacity: 0.7 }} label="Duration" type="input" {...register("Duration")} error={!!errors.Duration} helperText={errors.Duration?.message} />
+                <TextField style={{ width: '20%', backgroundColor: "whitesmoke", opacity: 0.7 }} label="משך זמן הכנה" type="input" {...register("Duration")} error={!!errors.Duration} helperText={errors.Duration?.message} />
                 <br />
                 <FormControl style={{ width: '20%', backgroundColor: "whitesmoke", opacity: 0.7 }}>
-                    <InputLabel>Difficulty</InputLabel>
+                    <InputLabel>רמת קושי</InputLabel>
                     <Select {...register("Difficulty")} error={!!errors.Difficulty} displayEmpty helperText={errors.Difficulty?.message}>
                         <MenuItem value={1}>קל</MenuItem>
                         <MenuItem value={2}>בינוני</MenuItem>
@@ -96,27 +98,33 @@ export default () => {
                 <div >
                     {Ingrident?.map((item, index) => (
                         <div class="card" key={index} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', opacity: 0.8 }}>
-                            <TextField type="text" label="product name:"  {...register(`Ingrident.${index}.Name`)} />
-                            <TextField label="count:" {...register(`Ingrident.${index}.Count`)} />
-                            <TextField type="text" label="type:" {...register(`Ingrident.${index}.Type`)} />
+                            <TextField type="text" label="מוצר"  {...register(`Ingrident.${index}.Name`)} />
+                            <TextField label="כמות:" {...register(`Ingrident.${index}.Count`)} />
+                            <TextField type="text" label="סוג:" {...register(`Ingrident.${index}.Type`)} />
+                            <Button variant="outlined" startIcon={<Remove />} onClick={() => removeIngr()}>
+                                הסר מוצר
+                            </Button>
                         </div>
                     ))}
                 </div>
                 <Button variant="outlined" startIcon={<AddIcon />} onClick={() => appendIngridents({ Name: "", Count: 0, Type: "" })}>
-                    ADD INGRIDENT
+                    הוסף מוצר
                 </Button>
                 <div>
-                    {Instructions?.map((item, index) => (
+                    {Instructions?.map((item,index) => (
                         <div key={index}>
-                            <TextField type="text" placeholder="enter Instruction:" {...register(`Instructions.${index}`)} />
+                            <TextField type="text" placeholder="הוראות הכנה" {...register(`Instructions.${index}`)} />
+                            <Button variant="outlined" startIcon={<Remove />} onClick={() => removeInst(index)}>
+                                הסר
+                            </Button>
                         </div>
                     ))}
                 </div>
                 <Button variant="outlined" startIcon={<AddIcon />} onClick={() => appendInstructions(" ")}>
-                    ADD INSTRUCTION
+                    הוסף הוראה
                 </Button>
                 <br />
-                <Button variant="contained" color="primary" type="submit">Submit</Button>
+                <Button variant="contained" color="primary" type="submit">שמור ושלח</Button>
             </form>
         </div>
     );

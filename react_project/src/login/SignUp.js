@@ -14,7 +14,7 @@ let schema = yup
         Email: yup.string().email().required(),
         Phone: yup.string().required(),
         Tz: yup.string().required(),
-        Password: yup.string().required(),
+        Password: yup.string().min(3).required("סיסמה חייבת לכלול לפחות 3 תווים"),
     })
     .required()
 
@@ -37,7 +37,7 @@ export default function App() {
                     Swal.fire({
                         position: "top-center",
                         icon: "success",
-                        title: "you sign up successfully",
+                        title: "נרשמת בהצלחה",
                         showConfirmButton: false,
                         timer: 2500
                     });
@@ -56,21 +56,21 @@ export default function App() {
         <div className="p">
             <form onSubmit={handleSubmit(onSubmit)} className="signup">
 
-                <TextField style={{ width: '20%', backgroundColor: 'white', opacity: 0.8 }} label="User Name" placeholder="user name"{...register("Username")} error={!!errors.Username} helperText={errors.Username?.message} />
+                <TextField style={{ width: '20%', backgroundColor: 'white', opacity: 0.8 }} label="שם משתמש" {...register("Username")} error={!!errors.Username} helperText={errors.Username?.message} />
                 <br />
-                <TextField style={{ width: '20%', backgroundColor: 'white', opacity: 0.8 }} label="Name" placeholder="Name" {...register("Name")} error={!!errors.Name} helperText={errors.Name?.message} />
+                <TextField style={{ width: '20%', backgroundColor: 'white', opacity: 0.8 }} label="שם"{...register("Name")} error={!!errors.Name} helperText={errors.Name?.message} />
                 <br />
-                <TextField style={{ width: '20%', backgroundColor: 'white', opacity: 0.8 }} label="Adress" placeholder="Adress"{...register("Adress")} error={!!errors.Adress} helperText={errors.Adress?.message} />
+                <TextField style={{ width: '20%', backgroundColor: 'white', opacity: 0.8 }} label="כתובת" {...register("Adress")} error={!!errors.Adress} helperText={errors.Adress?.message} />
                 <br />
-                <TextField style={{ width: '20%', backgroundColor: 'white', opacity: 0.8 }} label="Email" type="email" placeholder="Email" {...register("Email")} error={!!errors.Email} helperText={errors.Email?.message} />
+                <TextField style={{ width: '20%', backgroundColor: 'white', opacity: 0.8 }} label="דואר אלקטרוני"  placeholder="Email" {...register("Email")} error={!!errors.Email} helperText={errors.Email?.message} />
                 <br />
-                <TextField style={{ width: '20%', backgroundColor: 'white', opacity: 0.8 }} label="Phone" placeholder="Phone"{...register("Phone")} error={!!errors.Phone} helperText={errors.Phone?.message} />
+                <TextField style={{ width: '20%', backgroundColor: 'white', opacity: 0.8 }} label="טלפון"{...register("Phone")} error={!!errors.Phone} helperText={errors.Phone?.message} />
                 <br />
-                <TextField style={{ width: '20%', backgroundColor: 'white', opacity: 0.8 }} label="Tz" placeholder="Tz" {...register("Tz")} error={!!errors.Tz} helperText={errors.Tz?.message} />
+                <TextField style={{ width: '20%', backgroundColor: 'white', opacity: 0.8 }} label="מספר זהות" {...register("Tz")} error={!!errors.Tz} helperText={errors.Tz?.message} />
                 <br />
-                <TextField style={{ width: '20%', backgroundColor: 'white', opacity: 0.8 }} label="Password" placeholder="Password" type="Password" {...register("Password")} error={!!errors.Password} helperText={errors.Password?.message} />
+                <TextField style={{ width: '20%', backgroundColor: 'white', opacity: 0.8 }} label="סיסמה" type="Password" {...register("Password")} error={!!errors.Password} helperText={errors.Password?.message} />
                 <br />
-                <Button variant="contained" color="primary" type="submit">Submit</Button>
+                <Button variant="contained" color="primary" type="submit">הרשם</Button>
             </form>
         </div>
     )

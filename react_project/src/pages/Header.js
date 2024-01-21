@@ -6,14 +6,15 @@ import { styled } from '@mui/system';
 import { grey } from '@mui/material/colors';
 import Swal from "sweetalert2";
 
+
 export default  ()=> {
   const user = useSelector(state => state.user.user);
   const dispatch = useDispatch();
   const onLogOut = () => {
     Swal.fire({
       icon: "info",
-      title: "See You Later...",
-      text: `good buy ${user.Name}!!!`,
+      title: "!!!נשמח לראותך שוב",
+      text: `!להתראות ${user.Name}`,
       showConfirmButton: false,
       timer: 2500
     });
@@ -27,19 +28,19 @@ export default  ()=> {
     <div>
       {!user ? (
         <div>
-          <StyledLink to="/login">Log in</StyledLink>
-          <StyledLink to="/signUp">Sign Up</StyledLink>
+          <StyledLink to="/login">כניסה</StyledLink>
+          <StyledLink to="/signUp">הרשמה</StyledLink>
         </div>
       ) : (
         <div>
-          <StyledLink to="/homePage">Home Page</StyledLink>
-          <StyledLink to="/recipe">Recipes</StyledLink>
-          <StyledLink to="/myrecipe">My Recipes</StyledLink>
-          <StyledLink to="/shopping">Shopping</StyledLink>
-          <StyledLink onClick={onLogOut} to="/login">
-            Change User
+          <StyledLink to="/homePage">דף הבית</StyledLink>
+          <StyledLink to="/recipe">מתכונים</StyledLink>
+          <StyledLink to="/myrecipe">המתכונים שלי</StyledLink>
+          <StyledLink to="/shopping">קניות</StyledLink>
+          <StyledLink onClick={onLogOut} to="/login" >
+            התנתקות 
           </StyledLink>
-          <p style={{ top: '-15px', left: '15px', position: 'absolute' }}>the current user: {user.Name}</p>
+          <p style={{ top: '-15px', left: '15px', position: 'absolute' }}>המשתמש הנוכחי:  {user.Name}</p>
         </div>
       )}
     </div>

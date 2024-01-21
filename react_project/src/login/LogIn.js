@@ -7,8 +7,8 @@ import { SetUser } from "../service/user"
 import { Button, TextField } from "@mui/material"
 const schema = yup
     .object({
-        userName: yup.string().required(),
-        password: yup.string().min(3).required(),
+        userName: yup.string().required("שדה חובה!"),
+        password: yup.string().min(3).required("סיסמה חייבת לכלול לפחות 3 תווים"),
     })
     .required()
 
@@ -29,13 +29,13 @@ export default function App() {
     return (
         <div className="p">
             <form onSubmit={handleSubmit(onSubmit)}>
-                <TextField style={{ width: '20%' }} label="User Name" {...register("userName")} error={!!errors.userName} helperText={errors.userName?.message} />
+                <TextField style={{ width: '20%' }} label="שם משתמש" {...register("userName")} error={!!errors.userName} helperText={errors.userName?.message} />
                 <br />
-                <TextField style={{ width: '20%' }} label="Password" type="password" {...register("password")} error={!!errors.password} helperText={errors.password?.message} />
+                <TextField style={{ width: '20%' }} label="סיסמה" type="password" {...register("password")} error={!!errors.password} helperText={errors.password?.message} />
                 <br />
-                <Link to={'/signUp'}>Don't have an account yet? Sign up now</Link>
+                <Link to={'/signUp'}>!עדיין אין לך חשבון? צור עכשיו</Link>
                 <br />
-                <Button variant="contained" color="primary" type="submit">Submit</Button>
+                <Button variant="contained" color="primary" type="submit">התחבר</Button>
             </form>
         </div>
     )

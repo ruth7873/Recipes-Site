@@ -12,6 +12,9 @@ import { useLocation } from 'react-router-dom/dist';
 import { deleteRecipe, getRecipes } from '../service/recipes';
 import { AddCategory, getCategories } from '../service/category';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import CategoryIcon from '@mui/icons-material/Category';
+import AlarmOnIcon from '@mui/icons-material/AlarmOn';
+import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import Swal from 'sweetalert2'
 
 export default () => {
@@ -63,18 +66,19 @@ export default () => {
     };
     function deleteR(Id) {
         Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
+            title: "?האם אתה בטוח",
+            text: "?אתה בטוח שהינך רוצה למחוק את המתכון לצמיתות",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
+            confirmButtonText: "!כן, מחק",
+            cancelButtonText:"!!!!לא"
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire({
-                    title: "Deleted!",
-                    text: "Your file has been deleted.",
+                    title: "נמחק!",
+                    text: "המכון נמחק בהצלחה.",
                     icon: "success"
                 });
                 dispatch(deleteRecipe(Id))
@@ -84,14 +88,15 @@ export default () => {
     return (<div className='recipes'>
         <br />
         <Button variant="outlined" startIcon={<AddIcon />} onClick={() => (navigate('/recipe/add'), { state: null })}>
-            ADD RECIPE
+            הוסף מתכון
         </Button>
         <br />
         <div style={{ display: 'inline-flex' }}>
-            <InputLabel>Category</InputLabel>
+            {/* <InputLabel>קטגוריה</InputLabel> */}
+            {<CategoryIcon/>}
             <Select onChange={handleCategoryChange} value={selectedCategory || ''}>
                 <MenuItem value="">
-                    <em>None</em>
+                    <em>ללא</em>
                 </MenuItem>
                 {categories.map((x) => (
                     <MenuItem key={x.Id} value={x.Id}>
@@ -99,17 +104,19 @@ export default () => {
                     </MenuItem>
                 ))}
             </Select>
-            <InputLabel>Duration</InputLabel>
+            {/* <InputLabel>משך זמן הכנה</InputLabel> */}
+            {<AlarmOnIcon/>}
             <Select onChange={handleDurationChange} value={selectedDuration || ''}>
-                <MenuItem value=""><em>None</em></MenuItem>
-                <MenuItem value={15}>15 minutes</MenuItem>
-                <MenuItem value={30}>30 minutes</MenuItem>
-                <MenuItem value={45}>45 minutes</MenuItem>
-                <MenuItem value={60}>an hour and more</MenuItem>
+                <MenuItem value=""><em>ללא</em></MenuItem>
+                <MenuItem value={15}>15 דקות</MenuItem>
+                <MenuItem value={30}>30 דקות</MenuItem>
+                <MenuItem value={45}>45 דקות</MenuItem>
+                <MenuItem value={60}>שעה ויותר</MenuItem>
             </Select>
-            <InputLabel>Difficulty</InputLabel>
+            {/* <InputLabel>רמת קושי</InputLabel> */}
+            {<SignalCellularAltIcon/>}
             <Select onChange={handleDifficultyChange} value={selectedDifficulty || ''}>
-                <MenuItem value=""><em>None</em></MenuItem>
+                <MenuItem value=""><em>ללא</em></MenuItem>
                 <MenuItem value={1}>קל</MenuItem>
                 <MenuItem value={2}>בינוני</MenuItem>
                 <MenuItem value={3}>קשה</MenuItem>
@@ -117,10 +124,10 @@ export default () => {
             </Select>
         </div>
         <br />
-        <Button variant="outlined" startIcon={<AddIcon />} onClick={() => SetIfAddCategory(true)}>ADD CATEGORY </Button>
+        <Button variant="outlined" startIcon={<AddIcon />} onClick={() => SetIfAddCategory(true)}>הוסף קטגוריה</Button>
         <br />
         {ifAddCategory ?
-            <TextField style={{ width: '20%' }} label="Category Name"
+            <TextField style={{ width: '20%' }} label="הכנס שם קטגוריה"
                 onBlur={(e) => {
                     dispatch(AddCategory(e.target.value));
                     SetIfAddCategory(false)
@@ -142,14 +149,14 @@ export default () => {
                             setShowDetails(true);
                             setSelectedRecipe(x);
                         }}
-                        > Recipe Details</Button>
+                        >להצגת פרטי המתכון</Button>
                         <Button size="small" startIcon={<DeleteIcon />} disabled={x.UserId !== user.Id} onClick={() => deleteR(x.Id)} >
-                            Delete
+                            מחק
                         </Button>
                         <Button size="small" startIcon={<EditIcon />} disabled={x.UserId !== user.Id} onClick={() => (
                             navigate('/recipe/edit', { state: x })
                         )}>
-                            Edit
+                            ערוך
                         </Button>
                     </CardActions>
                 </Card>
