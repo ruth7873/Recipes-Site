@@ -9,7 +9,7 @@ import Shopping from './pages/Shopping';
 import AddRecipe from './pages/AddRecipe';
 import Image from './images/logo.jpeg';
 import Recipe from './pages/Recipe';
-import Image2 from './images/img.jpeg'
+import Image2 from './images/img.jpg'
 import Image3 from './images/copyright.png';
 
 function App() {
