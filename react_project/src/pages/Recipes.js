@@ -92,7 +92,6 @@ export default () => {
         </Button>
         <br />
         <div style={{ display: 'inline-flex' }}>
-            {/* <InputLabel>קטגוריה</InputLabel> */}
             {<CategoryIcon/>}
             <Select onChange={handleCategoryChange} value={selectedCategory || ''}>
                 <MenuItem value="">
@@ -104,7 +103,6 @@ export default () => {
                     </MenuItem>
                 ))}
             </Select>
-            {/* <InputLabel>משך זמן הכנה</InputLabel> */}
             {<AlarmOnIcon/>}
             <Select onChange={handleDurationChange} value={selectedDuration || ''}>
                 <MenuItem value=""><em>ללא</em></MenuItem>
@@ -113,7 +111,6 @@ export default () => {
                 <MenuItem value={45}>45 דקות</MenuItem>
                 <MenuItem value={60}>שעה ויותר</MenuItem>
             </Select>
-            {/* <InputLabel>רמת קושי</InputLabel> */}
             {<SignalCellularAltIcon/>}
             <Select onChange={handleDifficultyChange} value={selectedDifficulty || ''}>
                 <MenuItem value=""><em>ללא</em></MenuItem>

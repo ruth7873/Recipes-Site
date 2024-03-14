@@ -1,4 +1,5 @@
 import axios from "axios"
+import Swal from "sweetalert2"
 
 export const getCategories = () => {
     return dispatch =>
@@ -15,6 +16,10 @@ export const AddCategory = (category) => {
         axios.post(`http://localhost:8080/api/category`, { Name: category })
             .then((res) => {
                 dispatch({ type: "ADD_CATEGORY", data: res.data })
+                Swal.fire({
+                    text: "הקטגוריה נוספה בהצלחה",
+                    icon: "success",
+                })
             })
             .catch((error) => console.error(error))
 }
